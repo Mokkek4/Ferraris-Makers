@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I nostri robot</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #38bdf8;
+            --text: #334155;
+            --bg: #f8fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12), transparent 28rem),
+                radial-gradient(circle at 90% 55%, rgba(15, 23, 42, 0.08), transparent 30rem),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* 1. PARTE MENU */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* 2. PARTE PICCOLA PRESENTAZIONE */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #94a3b8;
+        }
+
+        /* 3. PARTE FOTO SCORREVOLI / ROBOT */
+        .robots-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .robot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .robot-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .robot-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .robot-image-container {
+            position: relative;
+            height: 250px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .robot-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .robot-image-container img.exploded {
+            opacity: 0;
+        }
+
+        .robot-card:hover .robot-image-container img.complete {
+            opacity: 0;
+        }
+
+        .robot-card:hover .robot-image-container img.exploded {
+            opacity: 1;
+        }
+
+        .robot-info {
+            padding: 1.5rem;
+        }
+
+        .robot-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .robot-info p {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        .management-section {
+            position: relative;
+            max-width: 1100px;
+            margin: 5rem auto;
+            padding: 4rem 2rem;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 20px;
+            background:
+                linear-gradient(120deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.94)),
+                var(--primary);
+            color: var(--white);
+            text-align: center;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2);
+            overflow: hidden;
+            scroll-margin-top: 90px;
+        }
+
+        .management-section::before,
+        .management-section::after {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .management-section::before {
+            top: -110px;
+            left: -55px;
+        }
+
+        .management-section::after {
+            right: -55px;
+            bottom: -110px;
+        }
+
+        .management-section h2 {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.25rem;
+            font-size: 2rem;
+        }
+
+        .management-section p {
+            position: relative;
+            z-index: 1;
+            max-width: 580px;
+            margin: 0 auto 1.75rem;
+            color: #cbd5e1;
+        }
+
+        .management-link {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .management-link:hover {
+            background: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary);
+            color: var(--white);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PARTE MENU -->
+    <header>
+        
+        <nav>
+            <ul>
+                <li><a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer">
+                  <img src="logo-removebg-preview.png" alt="logo" class="logo">
+                </a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#robots">I Robot</a></li>
+                <li><a href="#app">App</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 2. PARTE PICCOLA PRESENTAZIONE -->
+    <section class="hero">
+        <h1>I nostri robot,costruiti e programmati da <span>noi</span></h1>
+        <p>Abbiamo progettato e realizzato due robot: un quadrupede e un cingolato, entrambi dotati di avanzate tecnologie di movimento e controllo.</p>
+    </section>
+
+    <!-- 3. PARTE FOTO SCORREVOLI / ROBOT -->
+    <section class="robots-section" id="robots">
+        <h2 class="section-title">I Nostri Robot</h2>
+        <div class="robot-grid">
+            
+            <!-- Robot 1: Quadrupede / Ragno -->
+            <div class="robot-card">
+                <div class="robot-image-container">
+                    <!-- Sostituisci i link delle immagini con i tuoi file -->
+                    <img src="quadrupede.jpeg" alt="Quadrupede Completo" class="complete">
+                    <img src="quadrupede-esploso.jpeg" alt="Quadrupede Esploso" class="exploded">
+                </div>
+                <div class="robot-info">
+                    <span class="badge">Passa il mouse per l'esploso</span>
+                    <h3>Spider-Bot Quadrupede</h3>
+                    <p>Un robot a quattro gambe con movimento dinamico e flessibile.</p>
+                </div>
+            </div>
+
+            <!-- Robot 2: Cingolato con carrello appendice -->
+            <div class="robot-card">
+                <div class="robot-image-container">
+                    <!-- Sostituisci i link delle immagini con i tuoi file -->
+                    <img src="cingolato.jpeg" alt="Cingolato Completo" class="complete">
+                    <img src="cingolato-esploso.jpeg" alt="Cingolato Esploso" class="exploded">
+                </div>
+                <div class="robot-info">
+                    <span class="badge">Passa il mouse per l'esploso</span>
+                    <h3>Cingolato Heavy-Duty</h3>
+                    <p>Un robot cingolato dotato di carrello, con movimenti affidabili.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="management-section" id="app" aria-labelledby="management-title">
+        <h2 id="management-title">Per gestire i robottini clicca qui</h2>
+        <p>Accedi alla pagina di gestione per scoprire da vicino il funzionamento e i componenti del quadrupede.</p>
+        <a class="management-link" href="menu.html">Clicca qui</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 4I. Tutti i diritti riservati.</p>
+    </footer>
+
+</body>
+</html>

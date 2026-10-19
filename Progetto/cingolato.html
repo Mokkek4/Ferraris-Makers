@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Controllo Cingolato</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #007AFF;
+            --primary-glow: rgba(0, 122, 255, 0.35);
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --danger: #FF3B30;
+            --success: #34C759;
+            --text-main: #ffffff;
+            --text-dim: #9aa4b2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 50% -20%, rgba(0, 122, 255, 0.1), transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .d-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 280px;
+            margin: 2rem auto;
+        }
+
+        .control-btn {
+            aspect-ratio: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 22px;
+            color: white;
+            font-size: 1.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.12s ease;
+            cursor: pointer;
+        }
+
+        .control-btn.active, .control-btn:active {
+            transform: scale(0.92);
+            background: var(--primary);
+            box-shadow: 0 0 25px var(--primary-glow);
+            border-color: var(--primary);
+        }
+
+        .action-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 1rem auto;
+        }
+
+        .action-btn {
+            min-width: 110px;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+        }
+
+        .action-btn.start {
+            background: rgba(52, 199, 89, 0.18);
+        }
+
+        .action-btn.stop {
+            background: rgba(255, 59, 48, 0.18);
+        }
+
+        .action-btn.active,
+        .action-btn:active {
+            transform: scale(0.95);
+            color: white;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .action-btn.start.active {
+            background: var(--success);
+        }
+
+        .action-btn.stop.active {
+            background: var(--danger);
+        }
+
+        #btn-up { grid-column: 2; }
+        #btn-left { grid-column: 1; }
+        #btn-right { grid-column: 3; }
+        #btn-down { grid-column: 2; }
+
+        .keyboard-hint {
+            margin-top: 1.5rem;
+            color: #7a8191;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.8;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .back-link:hover {
+            background: var(--card-bg);
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Controllo Cingolato</h1>
+
+        <div class="d-pad">
+            <button class="control-btn" id="btn-up" type="button">▲</button>
+            <button class="control-btn" id="btn-left" type="button">◀</button>
+            <button class="control-btn" id="btn-right" type="button">▶</button>
+            <button class="control-btn" id="btn-down" type="button">▼</button>
+        </div>
+
+        <div class="action-controls">
+            <button class="action-btn start active" id="btn-start" type="button">START</button>
+            <button class="action-btn stop" id="btn-stop" type="button">STOP</button>
+        </div>
+
+        <div class="keyboard-hint">
+            WASD o frecce per muovere · Enter per avviare · Spazio per fermare
+        </div>
+        <a class="back-link" href="menu.html">Torna alla scelta</a>
+    </div>
+
+    <script>
+        const keyToButton = {
+            ArrowUp: 'btn-up',
+            ArrowDown: 'btn-down',
+            ArrowLeft: 'btn-left',
+            ArrowRight: 'btn-right',
+            w: 'btn-up',
+            W: 'btn-up',
+            s: 'btn-down',
+            S: 'btn-down',
+            a: 'btn-left',
+            A: 'btn-left',
+            d: 'btn-right',
+            D: 'btn-right'
+        };
+
+        const movementButtons = ['btn-up', 'btn-down', 'btn-left', 'btn-right'];
+        let isStarted = true;
+
+        function setButtonActive(buttonId, active) {
+            document.getElementById(buttonId).classList.toggle('active', active);
+        }
+
+        function setStarted(started) {
+            isStarted = started;
+            setButtonActive('btn-start', started);
+            setButtonActive('btn-stop', !started);
+
+            if (!started) {
+                movementButtons.forEach((buttonId) => setButtonActive(buttonId, false));
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.repeat && (event.key === 'Enter' || event.code === 'Space')) return;
+
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                setStarted(true);
+                return;
+            }
+
+            if (event.code === 'Space') {
+                event.preventDefault();
+                setStarted(false);
+                return;
+            }
+
+            const buttonId = keyToButton[event.key];
+            if (!buttonId || !isStarted) return;
+
+            event.preventDefault();
+            setButtonActive(buttonId, true);
+        });
+
+        document.addEventListener('keyup', (event) => {
+            const buttonId = keyToButton[event.key];
+            if (!buttonId) return;
+
+            event.preventDefault();
+            setButtonActive(buttonId, false);
+        });
+
+        document.querySelectorAll('.control-btn').forEach((button) => {
+            button.addEventListener('pointerdown', () => {
+                if (isStarted) setButtonActive(button.id, true);
+            });
+
+            ['pointerup', 'pointercancel', 'pointerleave'].forEach((eventName) => {
+                button.addEventListener(eventName, () => {
+                    setButtonActive(button.id, false);
+                });
+            });
+        });
+
+        document.getElementById('btn-start').addEventListener('click', () => setStarted(true));
+        document.getElementById('btn-stop').addEventListener('click', () => setStarted(false));
+    </script>
+</body>
+</html>
