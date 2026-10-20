@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodGuard | Il Frigo Intelligente Anti-Spreco</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #38bdf8;
+            --text: #334155;
+            --bg: #f8fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12), transparent 28rem),
+                radial-gradient(circle at 90% 55%, rgba(15, 23, 42, 0.08), transparent 30rem),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* MENU / HEADER */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            color: var(--white);
+            padding: 4rem max(2rem, 5%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-copy {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        .hero-visual {
+            position: relative;
+            padding: 0.75rem;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: rotate(2deg);
+        }
+
+        .project-image {
+            display: block;
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 17px;
+        }
+
+        .hero-visual::after {
+            content: "Progetto scolastico · 2025/2026";
+            position: absolute;
+            right: 1.25rem;
+            bottom: -0.85rem;
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            transform: rotate(-2deg);
+        }
+
+        /* SEZIONI PRINCIPALI */
+        .content-section {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .content-section p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* GRIGLIA CARATTERISTICHE */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #64748b;
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary);
+            color: var(--white);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                padding: 3rem 1.5rem 4rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .hero p {
+                margin: 0 auto;
+            }
+
+            .hero-visual {
+                max-width: 520px;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU PRINCIPALE -->
+    <header>
+        <div class="logo-container">
+            <a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer">
+                <img src="../logo-removebg-preview.png" alt="Logo Scuola" class="logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#features">Funzionalità</a></li>
+                <li><a href="#about">Il Progetto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-copy">
+                <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: var(--accent); margin-bottom: 1.5rem;">IA e Dispositivi Intelligenti</span>
+                <h1>FoodGuard: <span>Il Frigo Intelligente Anti-Spreco</span></h1>
+                <p>Un dispositivo intelligente in grado di riconoscere gli alimenti all'interno e suggerire ricette creative per azzerare gli sprechi alimentari in cucina.</p>
+            </div>
+            <div class="hero-visual" aria-label="Immagine di FoodGuard">
+                <img class="project-image" src="../sito-presentazione/FoodGurd.jpeg" alt="FoodGuard, il frigo intelligente anti-spreco">
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE FUNZIONALITÀ -->
+    <section class="content-section" id="features">
+        <h2 class="section-title">Come Funziona</h2>
+        <p>Grazie all'intelligenza artificiale e a una rete di sensori avanzati, FoodGuard monitora costantemente lo stato del frigorifero.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Riconoscimento Alimenti</h3>
+                <p>Sensori di visione artificiale identificano i prodotti inseriti o rimossi dal frigorifero in tempo reale.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Ricette Anti-Spreco</h3>
+                <p>Analizza gli ingredienti vicini alla scadenza e suggerisce ricette gustose per utilizzarli subito.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Gestione Scadenze</h3>
+                <p>Invia notifiche smart sullo smartphone per avvisarti prima che i prodotti freschi vadano sprecati.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE DETTAGLI -->
+    <section class="content-section" id="about">
+        <h2 class="section-title">Il Progetto Scolastico</h2>
+        <p>Realizzato dagli studenti all'interno del laboratorio digitale e tecnologico, FoodGuard unisce IoT, programmazione Python e apprendimento automatico per promuovere la sostenibilità ambientale e la lotta allo spreco alimentare quotidiano.</p>
+        <div style="text-align: center; margin-top: 2rem;">
+            <span class="badge">Stato: Funzionante</span>
+            <span class="badge" style="background: #f1f5f9; color: var(--text);">Anno: 2025/2026</span>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 FoodGuard - Progetti e Innovazione - ISIS Marcianise. Tutti i diritti riservati.</p>
+    </footer>
+
+</body>
+</html>

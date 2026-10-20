@@ -122,6 +122,89 @@
             background: var(--danger);
         }
 
+        .speed {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 1rem;
+            margin: 1.5rem auto 0;
+            text-align: left;
+        }
+
+        .speed-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .speed-label {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .speed-value {
+            color: var(--text-main);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        #speed {
+            width: 100%;
+            height: 10px;
+            appearance: none;
+            border-radius: 999px;
+            outline: none;
+            background: linear-gradient(90deg, var(--primary), #5aa9ff var(--speed-progress), rgba(255,255,255,0.1) var(--speed-progress));
+            touch-action: none;
+        }
+
+        #speed::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            background: var(--text-main);
+            box-shadow: 0 0 0 5px var(--primary-glow);
+            cursor: pointer;
+        }
+
+        #speed::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            background: var(--text-main);
+            box-shadow: 0 0 0 5px var(--primary-glow);
+            cursor: pointer;
+        }
+
+        .speed-presets {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.9rem;
+        }
+
+        .speed-presets button {
+            flex: 1;
+            padding: 0.55rem 0;
+            border: 1px solid var(--card-border);
+            border-radius: 9px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-dim);
+            cursor: pointer;
+            font: 500 0.75rem 'Inter', sans-serif;
+        }
+
+        .speed-presets button.active {
+            border-color: var(--primary);
+            background: rgba(0, 122, 255, 0.2);
+            color: var(--text-main);
+        }
+
         #btn-up { grid-column: 2; }
         #btn-left { grid-column: 1; }
         #btn-right { grid-column: 3; }
@@ -137,8 +220,9 @@
         }
 
         .back-link {
-            display: inline-block;
-            margin-top: 1.5rem;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
             padding: 0.7rem 1.1rem;
             border: 1px solid var(--card-border);
             border-radius: 10px;
@@ -146,6 +230,7 @@
             font-size: 0.85rem;
             text-decoration: none;
             transition: background 0.2s ease, border-color 0.2s ease;
+            z-index: 10;
         }
 
         .back-link:hover {
@@ -169,6 +254,19 @@
             <button class="action-btn start active" id="btn-start" type="button">START</button>
             <button class="action-btn stop" id="btn-stop" type="button">STOP</button>
         </div>
+
+        <section class="speed" aria-label="Controllo velocità">
+            <div class="speed-head">
+                <span class="speed-label">Velocità</span>
+                <span class="speed-value"><span id="speedValue">100</span> <small>/ 255</small></span>
+            </div>
+            <input id="speed" type="range" min="0" max="255" value="100">
+            <div class="speed-presets">
+                <button type="button" data-speed="80">Piano</button>
+                <button type="button" data-speed="160">Medio</button>
+                <button type="button" data-speed="255">Turbo</button>
+            </div>
+        </section>
 
         <div class="keyboard-hint">
             WASD o frecce per muovere · Enter per avviare · Spazio per fermare
@@ -253,6 +351,30 @@
 
         document.getElementById('btn-start').addEventListener('click', () => setStarted(true));
         document.getElementById('btn-stop').addEventListener('click', () => setStarted(false));
+
+        const speedEl = document.getElementById('speed');
+        const speedValueEl = document.getElementById('speedValue');
+        const speedPresets = document.querySelectorAll('.speed-presets button');
+
+        function renderSpeed(value) {
+            const speed = Number(value);
+            const progress = Math.round((speed / 255) * 100);
+            speedValueEl.textContent = speed;
+            speedEl.style.setProperty('--speed-progress', `${progress}%`);
+            speedPresets.forEach((button) => {
+                button.classList.toggle('active', Number(button.dataset.speed) === speed);
+            });
+        }
+
+        speedEl.addEventListener('input', (event) => renderSpeed(event.target.value));
+        speedPresets.forEach((button) => {
+            button.addEventListener('click', () => {
+                speedEl.value = button.dataset.speed;
+                renderSpeed(speedEl.value);
+            });
+        });
+
+        renderSpeed(speedEl.value);
     </script>
 </body>
 </html>
