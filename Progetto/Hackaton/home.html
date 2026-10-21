@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concorsi ed Hackathon</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #38bdf8;
+            --text: #334155;
+            --bg: #f8fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12), transparent 28rem),
+                radial-gradient(circle at 90% 55%, rgba(15, 23, 42, 0.08), transparent 30rem),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* 1. PARTE MENU */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* 2. PARTE PICCOLA PRESENTAZIONE */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #94a3b8;
+        }
+
+        /* 3. PARTE CONCORSI HACKATHON */
+        .hackathon-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+
+        .hackathon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 550px) {
+            .hackathon-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hackathon-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hackathon-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Ratio 16:9 */
+            background: #000;
+        }
+
+        .video-container video,
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .hackathon-info {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .hackathon-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .hackathon-info p {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 1.25rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            align-self: flex-start;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary);
+            color: var(--white);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PARTE MENU -->
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer">
+                        <img src="../logo-removebg-preview.png" alt="logo" class="logo">
+                    </a>
+                </li>
+                <li><a href="sito-presentazione/home.html">Sito presentazione</a></li>
+                <li><a href="#hackathon">Hackathon</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 2. PARTE PICCOLA PRESENTAZIONE -->
+    <section class="hero">
+        <h1>Concorsi & <span>Hackathon</span></h1>
+        <p>In questa sezione sono raccolti i progetti realizzati per le competizioni e gli Hackathon a cui abbiamo partecipato. Ogni anno ci mettiamo alla prova sviluppando soluzioni software e robotiche innovative.</p>
+    </section>
+
+    <!-- 3. PARTE CONCORSI HACKATHON -->
+    <section class="hackathon-section" id="hackathon">
+        <h2 class="section-title">Le Nostre Partecipazioni</h2>
+        
+        <div class="hackathon-grid">
+            
+            <!-- Hackathon 2024 / 2025 -->
+            <div class="hackathon-card">
+                <div class="video-container">
+                    <!-- Sostituisci "video-2024-2025.mp4" con il percorso del tuo file video o un embed -->
+                    <video controls poster="poster-2024.jpg">
+                        <source src="video-2024-2025.mp4" type="video/mp4">
+                        Il tuo browser non supporta il tag video.
+                    </video>
+                </div>
+                <div class="hackathon-info">
+                    <span class="badge">Edizione 2024 / 2025</span>
+                    <h3>Progetto Videogame: "RoboEscape"</h3>
+                    <p><strong>Descrizione del Gioco:</strong> Un videogioco interattivo e strategico in cui il giocatore deve guidare un robot attraverso labirinti complessi ed evitare ostacoli dinamici. Il titolo integra meccaniche di gioco basate sulla fisica dei robot ed enigmi di logica programmatica.</p>
+                </div>
+            </div>
+
+            <!-- Hackathon 2025 / 2026 -->
+            <div class="hackathon-card">
+                <div class="video-container">
+                    <!-- Sostituisci "video-2025-2026.mp4" con il percorso del tuo file video o un embed -->
+                    <video controls poster="poster-2025.jpg">
+                        <source src="video-2025-2026.mp4" type="video/mp4">
+                        Il tuo browser non supporta il tag video.
+                    </video>
+                </div>
+                <div class="hackathon-info">
+                    <span class="badge">Edizione 2025 / 2026</span>
+                    <h3>Ecosistema di Robotica Autonoma</h3>
+                    <p>Un sistema innovativo di esplorazione basato su robotica collaborativa tra quadrupedi e cingolati per il monitoraggio e la mappatura di ambienti complessi e inaccessibili.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 4I. Tutti i diritti riservati.</p>
+    </footer>
+
+</body>
+</html>

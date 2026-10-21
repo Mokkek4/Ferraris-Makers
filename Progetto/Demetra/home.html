@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demetra | Il Drone 3D per la Tutela Ambientale</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #38bdf8;
+            --accent-green: #10b981;
+            --text: #334155;
+            --bg: #f8fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12), transparent 28rem),
+                radial-gradient(circle at 90% 55%, rgba(16, 185, 129, 0.08), transparent 30rem),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* MENU / HEADER */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #1e293b);
+            color: var(--white);
+            padding: 4rem max(2rem, 5%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-copy {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        .hero-visual {
+            position: relative;
+            padding: 0.75rem;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: rotate(2deg);
+        }
+
+        .project-image {
+            display: block;
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            object-position: center 72%;
+            border-radius: 17px;
+        }
+
+        .hero-visual::after {
+            content: "Progetto scolastico · 2025/2026";
+            position: absolute;
+            right: 1.25rem;
+            bottom: -0.85rem;
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            transform: rotate(-2deg);
+        }
+
+        /* SEZIONI PRINCIPALI */
+        .content-section {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .content-section p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* VIDEO DI PRESENTAZIONE */
+        .video-section {
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .video-section .section-title {
+            color: var(--white);
+        }
+
+        .video-section > p {
+            color: #cbd5e1;
+        }
+
+        .video-frame {
+            position: relative;
+            width: min(100%, 900px);
+            aspect-ratio: 16 / 9;
+            margin: 2rem auto 0;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            border-radius: 16px;
+            background: #020617;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .video-frame video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-link {
+            display: inline-block;
+            margin-top: 1.25rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .video-link:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        /* GRIGLIA CARATTERISTICHE */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg);
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #64748b;
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .badge-green {
+            background: #d1fae5;
+            color: #047857;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary);
+            color: var(--white);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                padding: 3rem 1.5rem 4rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .hero p {
+                margin: 0 auto;
+            }
+
+            .hero-visual {
+                max-width: 520px;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU PRINCIPALE -->
+    <header>
+        <div class="logo-container">
+            <a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer">
+                <img src="../logo-removebg-preview.png" alt="Logo Scuola" class="logo" onerror="this.onerror=null; this.src='https://placehold.co/160x40/0f172a/ffffff?text=ISIS+Marcianise'">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../sito-presentazione/home.html">Sito presentazione</a></li>
+                <li><a href="#video">Video</a></li>
+                <li><a href="#features">Funzionalità</a></li>
+                <li><a href="#about">Il Progetto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-copy">
+                <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: var(--accent); margin-bottom: 1.5rem;">IA e Monitoraggio Ambientale</span>
+                <h1>Demetra: <span>Il Drone 3D per la Tutela Ambientale</span></h1>
+                <p>Un sistema aereo autonomo realizzato con stampa 3D che combina visione artificiale, sensori IoT e intelligenza artificiale per individuare incendi e monitorare lo sversamento illecito di rifiuti sul territorio.</p>
+            </div>
+            <div class="hero-visual" aria-label="Immagine del drone Demetra">
+                <img class="project-image" src="../sito-presentazione/Demetra.jpeg" alt="Drone Demetra in sorvolo ambientale" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0f172a/38bdf8?text=Demetra+Drone+3D'">
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO DI PRESENTAZIONE -->
+    <section class="content-section video-section" id="video">
+        <h2 class="section-title">Demetra in azione</h2>
+        <p>Scopri il progetto, la tecnologia e la missione del drone Demetra attraverso il video di presentazione.</p>
+        <div class="video-frame">
+            <video controls preload="metadata" playsinline aria-label="Video di presentazione del progetto Demetra">
+                <source src="Demetra.mp4" type="video/mp4">
+                Il browser non supporta la riproduzione video.
+            </video>
+        </div>
+        <p><a class="video-link" href="https://youtu.be/i03m6C48A9o" target="_blank" rel="noopener noreferrer">Vedi il video su YouTube</a></p>
+    </section>
+
+    <!-- SEZIONE FUNZIONALITÀ -->
+    <section class="content-section" id="features">
+        <h2 class="section-title">Tecnologia al Servizio della Natura</h2>
+        <p>Grazie all'integrazione di sensori di bordo avanzati e algoritmi di apprendimento automatico, Demetra garantisce una sorveglianza attiva e costante del territorio circostante.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="badge badge-green">Hardware Personalizzato</span>
+                <h3>Stampa 3D Ecocompatibile</h3>
+                <p>Telaio e componenti strutturali ad alta resistenza progettati internamente e stampati in 3D con materiali leggeri e sostenibili per ottimizzare tempi di volo e manovrabilità.</p>
+            </div>
+            <div class="feature-card">
+                <span class="badge" style="background: #fee2e2; color: #b91c1c;">Prevenzione Emergenze</span>
+                <h3>Rilevamento Incendi Tempestivo</h3>
+                <p>Sistemi di visione artificiale e sensori termici che individuano precocemente focolai e sbalzi di temperatura anomali nelle zone boschive, inviando allerte immediate.</p>
+            </div>
+            <div class="feature-card">
+                <span class="badge">Analisi del Territorio</span>
+                <h3>Monitoraggio Rifiuti & Inquinamento</h3>
+                <p>Algoritmi di IA addestrati per riconoscere accumuli non autorizzati di rifiuti e depositi illeciti su aree estese, semplificando le operazioni di bonifica.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE DETTAGLI PROGETTO -->
+    <section class="content-section" id="about">
+        <h2 class="section-title">Il Progetto Scolastico</h2>
+        <p>Progettato e costruito interamente all'interno dei laboratori di robotica e fabbricazione digitale dagli studenti dell'istituto, Demetra rappresenta la convergenza tra tecnologia 3D, IoT e salvaguardia dell'ecosistema locale.</p>
+        <div style="text-align: center; margin-top: 2rem;">
+            <span class="badge badge-green">Stato: Prototipo Operativo</span>
+            <span class="badge" style="background: #f1f5f9; color: var(--text);">Anno Scolastico: 2025/2026</span>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Demetra - Progetti e Innovazione - ISIS Marcianise. Tutti i diritti riservati.</p>
+    </footer>
+
+</body>
+</html>

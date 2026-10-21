@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#050505">
     <title>Controllo Cingolato</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
+        html {
+            overflow: hidden;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
         :root {
             --primary: #007AFF;
             --primary-glow: rgba(0, 122, 255, 0.35);
@@ -15,6 +25,7 @@
             --card-border: rgba(255, 255, 255, 0.1);
             --danger: #FF3B30;
             --success: #34C759;
+            --amber: #f59e0b;
             --text-main: #ffffff;
             --text-dim: #9aa4b2;
         }
@@ -26,52 +37,111 @@
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            -webkit-user-select: none;
         }
 
         body {
             background-color: var(--bg);
-            background-image: radial-gradient(circle at 50% -20%, rgba(0, 122, 255, 0.1), transparent 50%);
+            background-image:
+                radial-gradient(circle at 10% 0%, rgba(0, 122, 255, 0.16), transparent 34%),
+                radial-gradient(circle at 90% 100%, rgba(52, 199, 89, 0.08), transparent 30%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-main);
+            padding: max(72px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
             overflow: hidden;
-            touch-action: none;
         }
 
         .container {
             width: 100%;
-            max-width: 420px;
-            padding: 1.5rem;
+            max-width: 460px;
+            padding: 2rem;
             text-align: center;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 30px 80px rgba(0,0,0,.55);
         }
 
         h1 {
-            margin-bottom: 1rem;
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 0.35rem;
+            font-size: clamp(1.6rem, 4vw, 2rem);
+            letter-spacing: -0.04em;
         }
+
+        /* Stato connessione */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid var(--card-border);
+            font-size: 13px;
+            color: #cbd2e1;
+            margin-bottom: 1rem;
+            max-width: 100%;
+        }
+        .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--text-dim); flex: none; transition: .3s; }
+        body[data-state="connected"] .dot { background: var(--success); box-shadow: 0 0 0 0 rgba(52,199,89,.6); animation: pulse 1.8s infinite; }
+        body[data-state="connecting"] .dot { background: var(--amber); animation: pulse-a 1s infinite; }
+        body[data-state="error"] .dot { background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52,199,89,.6); } 100% { box-shadow: 0 0 0 10px rgba(52,199,89,0); } }
+        @keyframes pulse-a { 50% { opacity: .3; } }
+
+        #connect {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 12px; border: 0; border-radius: 14px; cursor: pointer;
+            font: 600 15px 'Inter', sans-serif; color: white;
+            background: var(--primary);
+            box-shadow: 0 8px 20px var(--primary-glow);
+            transition: transform .15s, opacity .2s;
+            margin-top: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        #connect:active { transform: scale(.97); }
+        #connect svg { width: 18px; height: 18px; }
+        body[data-state="connected"] #connect {
+            background: rgba(52,199,89,.15); color: #86efac;
+            box-shadow: inset 0 0 0 1px rgba(52,199,89,.35);
+        }
+        body[data-state="connecting"] #connect { opacity: .7; pointer-events: none; }
 
         .d-pad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            width: 280px;
-            margin: 2rem auto;
+            gap: 12px;
+            width: min(280px, 100%);
+            margin: 1.2rem auto 1.5rem;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .control-btn {
             aspect-ratio: 1;
-            background: var(--card-bg);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
             border: 1px solid var(--card-border);
-            border-radius: 22px;
+            border-radius: 20px;
             color: white;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.12s ease;
             cursor: pointer;
+            touch-action: none;
+        }
+
+        .control-btn:hover {
+            border-color: rgba(0, 122, 255, 0.55);
+            background: rgba(0, 122, 255, 0.16);
         }
 
         .control-btn.active, .control-btn:active {
@@ -81,15 +151,9 @@
             border-color: var(--primary);
         }
 
-        .action-controls {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin: 1rem auto;
-        }
-
         .action-btn {
-            min-width: 110px;
+            flex: 1;
+            max-width: 150px;
             padding: 0.8rem 1rem;
             border: 1px solid var(--card-border);
             border-radius: 12px;
@@ -97,10 +161,6 @@
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
-        }
-
-        .action-btn.start {
-            background: rgba(52, 199, 89, 0.18);
         }
 
         .action-btn.stop {
@@ -114,20 +174,28 @@
             box-shadow: 0 0 20px var(--primary-glow);
         }
 
-        .action-btn.start.active {
-            background: var(--success);
-        }
-
         .action-btn.stop.active {
             background: var(--danger);
+        }
+
+        .d-pad .action-btn.stop {
+            grid-column: 2;
+            grid-row: 2;
+            width: 100%;
+            max-width: none;
+            aspect-ratio: 1;
+            padding: 0;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
         }
 
         .speed {
             background: rgba(0, 0, 0, 0.25);
             border: 1px solid var(--card-border);
             border-radius: 18px;
-            padding: 1rem;
-            margin: 1.5rem auto 0;
+            padding: 1.15rem;
+            margin: 0 auto;
             text-align: left;
         }
 
@@ -147,21 +215,22 @@
 
         .speed-value {
             color: var(--text-main);
-            font-size: 1.4rem;
-            font-weight: 700;
+            font: 700 1.2rem "JetBrains Mono", monospace;
         }
 
         #speed {
             width: 100%;
             height: 10px;
+            -webkit-appearance: none;
             appearance: none;
             border-radius: 999px;
             outline: none;
-            background: linear-gradient(90deg, var(--primary), #5aa9ff var(--speed-progress), rgba(255,255,255,0.1) var(--speed-progress));
+            background: linear-gradient(90deg, var(--primary), #5aa9ff var(--speed-progress, 39%), rgba(255,255,255,0.1) var(--speed-progress, 39%));
             touch-action: none;
         }
 
         #speed::-webkit-slider-thumb {
+            -webkit-appearance: none;
             appearance: none;
             width: 24px;
             height: 24px;
@@ -197,6 +266,7 @@
             color: var(--text-dim);
             cursor: pointer;
             font: 500 0.75rem 'Inter', sans-serif;
+            transition: .15s;
         }
 
         .speed-presets button.active {
@@ -205,15 +275,15 @@
             color: var(--text-main);
         }
 
-        #btn-up { grid-column: 2; }
-        #btn-left { grid-column: 1; }
-        #btn-right { grid-column: 3; }
-        #btn-down { grid-column: 2; }
+        #btn-up { grid-column: 2; grid-row: 1; }
+        #btn-left { grid-column: 1; grid-row: 2; }
+        #btn-right { grid-column: 3; grid-row: 2; }
+        #btn-down { grid-column: 2; grid-row: 3; }
 
         .keyboard-hint {
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
             color: #7a8191;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             line-height: 1.8;
@@ -221,44 +291,136 @@
 
         .back-link {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
+            top: max(16px, env(safe-area-inset-top));
+            right: max(12px, env(safe-area-inset-right));
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
             padding: 0.7rem 1.1rem;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border: 1px solid rgba(0, 122, 255, 0.45);
+            border-radius: 999px;
             color: var(--text-main);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            font-weight: 600;
             text-decoration: none;
-            transition: background 0.2s ease, border-color 0.2s ease;
+            background: rgba(0, 122, 255, 0.14);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
             z-index: 10;
         }
 
         .back-link:hover {
-            background: var(--card-bg);
+            background: var(--primary);
             border-color: var(--primary);
+            color: var(--text-main);
+        }
+
+        @media (min-width: 769px) {
+            body {
+                min-height: 100vh;
+                padding: 0;
+            }
+
+            .container {
+                max-width: none;
+                min-height: 100vh;
+                padding: 8vh 8vw;
+                border: 0;
+                border-radius: 0;
+                display: grid;
+                grid-template-columns: minmax(280px, 0.8fr) minmax(440px, 1.2fr);
+                grid-template-rows: auto auto auto 1fr auto;
+                grid-template-areas:
+                    "title title"
+                    "status pad"
+                    "connect pad"
+                    "speed pad"
+                    "hint pad";
+                align-items: center;
+                column-gap: 8vw;
+            }
+
+            h1 {
+                grid-area: title;
+                text-align: left;
+                font-size: clamp(2rem, 4vw, 3.5rem);
+            }
+
+            .status {
+                grid-area: status;
+                justify-self: start;
+                margin: 0;
+            }
+
+            #connect {
+                grid-area: connect;
+                max-width: 360px;
+                margin: 1.5rem 0 0;
+                padding: 1rem 1.25rem;
+                font-size: 1rem;
+            }
+
+            .d-pad {
+                grid-area: pad;
+                width: min(42vw, 520px);
+                justify-self: center;
+                gap: 18px;
+                padding: 18px;
+                margin: 0;
+                border-radius: 34px;
+            }
+
+            .control-btn {
+                font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+                border-radius: 24px;
+            }
+
+            .d-pad .action-btn.stop {
+                border-radius: 24px;
+                font-size: 1rem;
+            }
+
+            .speed {
+                grid-area: speed;
+                width: 100%;
+                max-width: 420px;
+                margin: 0;
+                padding: 1.4rem;
+            }
+
+            .keyboard-hint {
+                grid-area: hint;
+                max-width: 420px;
+                margin: 0;
+                text-align: left;
+            }
         }
     </style>
 </head>
-<body>
+<body data-state="idle">
     <div class="container">
         <h1>Controllo Cingolato</h1>
 
-        <div class="d-pad">
-            <button class="control-btn" id="btn-up" type="button">▲</button>
-            <button class="control-btn" id="btn-left" type="button">◀</button>
-            <button class="control-btn" id="btn-right" type="button">▶</button>
-            <button class="control-btn" id="btn-down" type="button">▼</button>
-        </div>
+        <div class="status"><i class="dot"></i><span id="status">Disconnesso</span></div>
 
-        <div class="action-controls">
-            <button class="action-btn start active" id="btn-start" type="button">START</button>
+        <button id="connect">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 7 10 10-5 5V2l5 5L7 17"/></svg>
+            <span id="connectLabel">Connetti robot</span>
+        </button>
+
+        <div class="d-pad">
+            <button class="control-btn" id="btn-up" data-cmd="F" type="button">▲</button>
+            <button class="control-btn" id="btn-left" data-cmd="L" type="button">◀</button>
             <button class="action-btn stop" id="btn-stop" type="button">STOP</button>
+            <button class="control-btn" id="btn-right" data-cmd="R" type="button">▶</button>
+            <button class="control-btn" id="btn-down" data-cmd="B" type="button">▼</button>
         </div>
 
         <section class="speed" aria-label="Controllo velocità">
             <div class="speed-head">
                 <span class="speed-label">Velocità</span>
-                <span class="speed-value"><span id="speedValue">100</span> <small>/ 255</small></span>
+                <span class="speed-value"><span id="speedValue">100</span></span>
             </div>
             <input id="speed" type="range" min="0" max="255" value="100">
             <div class="speed-presets">
@@ -269,12 +431,84 @@
         </section>
 
         <div class="keyboard-hint">
-            WASD o frecce per muovere · Enter per avviare · Spazio per fermare
+            WASD o frecce per muovere · Spazio per fermare
         </div>
-        <a class="back-link" href="menu.html">Torna alla scelta</a>
+        <a class="back-link" href="menu.html"><span aria-hidden="true">←</span> Torna alla scelta</a>
     </div>
 
     <script>
+        const SERVICE = "19b10000-e8f2-537e-4f6c-d104768a1214";
+        const CHARACTERISTIC = "19b10001-e8f2-537e-4f6c-d104768a1214";
+
+        let device;
+        let tx;
+        const statusEl = document.getElementById("status");
+        const connectBtn = document.getElementById("connect");
+        const connectLabel = document.getElementById("connectLabel");
+        const speedEl = document.getElementById("speed");
+
+        function setState(state, text) {
+            document.body.dataset.state = state;
+            statusEl.textContent = text;
+            connectLabel.textContent =
+                state === "connected" ? "Disconnetti" :
+                state === "connecting" ? "Connessione…" : "Connetti robot";
+        }
+
+        function buzz(ms) {
+            if (navigator.vibrate) navigator.vibrate(ms);
+        }
+
+        async function send(command) {
+            if (!tx) {
+                return;
+            }
+            try {
+                await tx.writeValue(new TextEncoder().encode(command));
+            } catch (e) {
+                setState("error", "Errore invio: " + e.message);
+            }
+        }
+
+        connectBtn.onclick = async () => {
+            if (device && device.gatt && device.gatt.connected) {
+                try { await send("S"); } catch (_) {}
+                device.gatt.disconnect();
+                return;
+            }
+
+            try {
+                if (!navigator.bluetooth) {
+                    setState("error", "Web Bluetooth non supportato");
+                    return;
+                }
+
+                setState("connecting", "Ricerca robot…");
+
+                device = await navigator.bluetooth.requestDevice({
+                    filters: [{ services: [SERVICE] }]
+                });
+
+                device.addEventListener("gattserverdisconnected", () => {
+                    tx = null;
+                    stopRobot();
+                    setState("idle", "Disconnesso");
+                });
+
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService(SERVICE);
+                tx = await service.getCharacteristic(CHARACTERISTIC);
+
+                setState("connected", "Connesso a " + (device.name || "robot"));
+                buzz([30, 40, 30]);
+
+                await send("S");
+                await send("V" + speedEl.value);
+            } catch (e) {
+                setState("error", "Connessione fallita: " + e.message);
+            }
+        };
+
         const keyToButton = {
             ArrowUp: 'btn-up',
             ArrowDown: 'btn-down',
@@ -291,42 +525,51 @@
         };
 
         const movementButtons = ['btn-up', 'btn-down', 'btn-left', 'btn-right'];
-        let isStarted = true;
 
         function setButtonActive(buttonId, active) {
-            document.getElementById(buttonId).classList.toggle('active', active);
+            const btn = document.getElementById(buttonId);
+            if (!btn) return;
+            btn.classList.toggle('active', active);
+            const cmd = btn.dataset.cmd;
+            if (cmd && tx) {
+                if (active) {
+                    buzz(15);
+                    send(cmd);
+                } else {
+                    send("S");
+                }
+            }
         }
 
-        function setStarted(started) {
-            isStarted = started;
-            setButtonActive('btn-start', started);
-            setButtonActive('btn-stop', !started);
-
-            if (!started) {
-                movementButtons.forEach((buttonId) => setButtonActive(buttonId, false));
-            }
+        function stopRobot() {
+            movementButtons.forEach((buttonId) => {
+                document.getElementById(buttonId).classList.remove('active');
+            });
+            if (tx) send("S");
+            buzz(40);
         }
 
         document.addEventListener('keydown', (event) => {
-            if (event.repeat && (event.key === 'Enter' || event.code === 'Space')) return;
-
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                setStarted(true);
-                return;
-            }
-
             if (event.code === 'Space') {
+                if (event.repeat) return;
                 event.preventDefault();
-                setStarted(false);
+                stopRobot();
                 return;
             }
 
             const buttonId = keyToButton[event.key];
-            if (!buttonId || !isStarted) return;
+            if (!buttonId) return;
 
             event.preventDefault();
-            setButtonActive(buttonId, true);
+            const btn = document.getElementById(buttonId);
+            if (btn && !btn.classList.contains('active')) {
+                btn.classList.add('active');
+                const cmd = btn.dataset.cmd;
+                if (cmd && tx) {
+                    buzz(15);
+                    send(cmd);
+                }
+            }
         });
 
         document.addEventListener('keyup', (event) => {
@@ -334,25 +577,43 @@
             if (!buttonId) return;
 
             event.preventDefault();
-            setButtonActive(buttonId, false);
+            const btn = document.getElementById(buttonId);
+            if (btn) {
+                btn.classList.remove('active');
+                if (tx) {
+                    send("S");
+                }
+            }
         });
 
         document.querySelectorAll('.control-btn').forEach((button) => {
-            button.addEventListener('pointerdown', () => {
-                if (isStarted) setButtonActive(button.id, true);
+            button.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                button.classList.add('active');
+                const cmd = button.dataset.cmd;
+                if (cmd && tx) {
+                    buzz(15);
+                    send(cmd);
+                }
             });
 
-            ['pointerup', 'pointercancel', 'pointerleave'].forEach((eventName) => {
-                button.addEventListener(eventName, () => {
-                    setButtonActive(button.id, false);
-                });
-            });
+            const release = () => {
+                if (button.classList.contains('active')) {
+                    button.classList.remove('active');
+                    if (tx) {
+                        send("S");
+                    }
+                }
+            };
+
+            button.addEventListener('pointerup', release);
+            button.addEventListener('pointercancel', release);
+            button.addEventListener('pointerleave', release);
+            button.addEventListener('contextmenu', e => e.preventDefault());
         });
 
-        document.getElementById('btn-start').addEventListener('click', () => setStarted(true));
-        document.getElementById('btn-stop').addEventListener('click', () => setStarted(false));
+        document.getElementById('btn-stop').addEventListener('click', stopRobot);
 
-        const speedEl = document.getElementById('speed');
         const speedValueEl = document.getElementById('speedValue');
         const speedPresets = document.querySelectorAll('.speed-presets button');
 
@@ -367,10 +628,16 @@
         }
 
         speedEl.addEventListener('input', (event) => renderSpeed(event.target.value));
+        speedEl.addEventListener('change', (event) => {
+            if (tx) send("V" + event.target.value);
+        });
+
         speedPresets.forEach((button) => {
             button.addEventListener('click', () => {
                 speedEl.value = button.dataset.speed;
                 renderSpeed(speedEl.value);
+                buzz(10);
+                if (tx) send("V" + speedEl.value);
             });
         });
 
