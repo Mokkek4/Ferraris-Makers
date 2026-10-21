@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -141,7 +141,7 @@
         }
 
         .hero-visual::after {
-            content: "Progetto scolastico Â· 2025/2026";
+            content: "Progetto scolastico · 2025/2026";
             position: absolute;
             right: 1.25rem;
             bottom: -0.85rem;
@@ -321,6 +321,46 @@
                 margin: 0 auto;
             }
         }
+            /* Ottimizzazione mobile */
+        @media (max-width: 700px) {
+            body { overflow-x: hidden; }
+            header { gap: 0.75rem; padding: 0.65rem 1rem; }
+            header nav, nav { min-width: 0; }
+            nav ul { justify-content: flex-end; flex-wrap: wrap; gap: 0.55rem 0.9rem; }
+            nav ul li a { font-size: 0.78rem; white-space: nowrap; }
+            .logo { height: 34px; max-width: 130px; }
+            .hero { padding: 3rem 1.25rem; }
+            .hero h1, h1 { font-size: clamp(1.8rem, 9vw, 2.35rem); line-height: 1.15; }
+            .hero p { font-size: 1rem; }
+            .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-copy { text-align: center; }
+            .hero-copy p, .hero p { margin-left: auto; margin-right: auto; }
+            .hero-visual, .visual { width: 100%; max-width: 100%; transform: none; }
+            .project-image, .visual img { height: min(62vw, 280px); }
+            .content-section, .section, .info-section, .management-section { margin: 2rem 1rem; padding: 2rem 1.1rem; border-radius: 14px; }
+            .catalog-section, .hackathon-section, main { margin: 2rem auto; padding: 0 1rem; }
+            .section-title { font-size: 1.65rem; margin-bottom: 1.25rem; }
+            .robot-grid, .features-grid, .hackathon-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            .robot-card, .hackathon-card { min-width: 0; }
+            .robot-image-container { height: min(58vw, 230px); }
+            .robot-info, .hackathon-info { padding: 1.15rem; }
+            .filters-bar { gap: 0.5rem; margin-bottom: 1.75rem; }
+            .filter-btn { font-size: 0.78rem; padding: 0.45rem 0.7rem; }
+            .catalog-section.impresa-view .robot-grid, .catalog-section.impresa-view .robot-card[data-category~="impresa"] { width: 100%; grid-template-columns: 1fr; }
+            .video-container { padding-top: 56.25%; }
+            .video-frame { width: 100%; }
+            footer { padding: 1.5rem 1rem; }
+            footer p { font-size: 0.8rem; }
+            .ai-credit { font-size: 0.6rem; }
+        }
+
+        @media (max-width: 420px) {
+            header { align-items: flex-start; }
+            nav ul { gap: 0.4rem 0.65rem; }
+            nav ul li a { font-size: 0.7rem; }
+            .logo { height: 30px; max-width: 110px; }
+            .content-section, .section, .info-section, .management-section { padding: 1.5rem 0.9rem; }
+        }
     </style>
 </head>
 <body>
@@ -336,7 +376,7 @@
             <ul>
                 <li><a href="../index.html">Catalogo progetti</a></li>
                 <li><a href="#video">Video</a></li>
-                <li><a href="#features">Funzionalità </a></li>
+                <li><a href="#features">Funzionalità</a></li>
                 <li><a href="#about">Il Progetto</a></li>
             </ul>
         </nav>
@@ -369,7 +409,7 @@
         <p><a class="video-link" href="https://youtu.be/i03m6C48A9o" target="_blank" rel="noopener noreferrer">Vedi il video su YouTube</a></p>
     </section>
 
-    <!-- SEZIONE FUNZIONALITÃ€ -->
+    <!-- SEZIONE FUNZIONALITÀ -->
     <section class="content-section" id="features">
         <h2 class="section-title">Tecnologia al Servizio della Natura</h2>
         <p>Grazie all'integrazione di sensori di bordo avanzati e algoritmi di apprendimento automatico, Demetra garantisce una sorveglianza attiva e costante del territorio circostante.</p>
@@ -378,7 +418,7 @@
             <div class="feature-card">
                 <span class="badge badge-green">Hardware Personalizzato</span>
                 <h3>Stampa 3D Ecocompatibile</h3>
-                <p>Telaio e componenti strutturali ad alta resistenza progettati internamente e stampati in 3D con materiali leggeri e sostenibili per ottimizzare tempi di volo e manovrabilitÃ .</p>
+                <p>Telaio e componenti strutturali ad alta resistenza progettati internamente e stampati in 3D con materiali leggeri e sostenibili per ottimizzare tempi di volo e manovrabilità.</p>
             </div>
             <div class="feature-card">
                 <span class="badge" style="background: #fee2e2; color: #b91c1c;">Prevenzione Emergenze</span>
@@ -411,6 +451,7 @@
 
 </body>
 </html>
+
 
 
 

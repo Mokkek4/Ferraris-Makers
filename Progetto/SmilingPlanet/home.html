@@ -1,11 +1,52 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Smiling Planet</title>
 <style>
 :root{--primary:#0f172a;--accent:#10b981;--text:#334155;--bg:#f8fafc}*{box-sizing:border-box;margin:0;font-family:'Segoe UI',Tahoma,sans-serif}body{background:radial-gradient(circle at 10% 20%,#10b9811f,transparent 28rem),var(--bg);color:var(--text);line-height:1.6}header{background:var(--primary);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.75rem 5%;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px #0000001a}.logo-container{display:flex;align-items:center}.logo{height:40px;width:auto;display:block;object-fit:contain}header a{color:#fff;text-decoration:none;font-weight:500}nav ul{display:flex;list-style:none;gap:2rem;align-items:center}nav a:hover{color:var(--accent)}.hero{background:linear-gradient(135deg,var(--primary),#064e3b);color:#fff;padding:4rem 5%}.hero-content{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}h1{font-size:2.5rem;color:#fff}h1 span{color:#6ee7b7}.hero p{color:#d1fae5;margin-top:1rem}.visual{padding:.75rem;border:1px solid #6ee7b759;border-radius:24px;background:#ffffff14}.visual img{display:block;width:100%;height:320px;object-fit:cover;border-radius:17px}main{max-width:1100px;margin:4rem auto;padding:0 2rem}.section{background:#fff;border-radius:16px;padding:3rem 2rem;box-shadow:0 4px 20px #0000000d}.section h2{text-align:center;color:var(--primary);margin-bottom:1rem}.section>p{text-align:center;max-width:800px;margin:0 auto 2rem;color:#64748b}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}.card{background:var(--bg);border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem}.card h3{color:var(--primary);margin-bottom:.5rem}.card p{color:#64748b}footer{background:var(--primary);color:#fff;text-align:center;padding:2rem;font-size:.9rem}.ai-credit{display:block;margin-top:.5rem;text-align:right;color:#ffffffa6;font-size:.65rem}@media(max-width:760px){.hero-content{grid-template-columns:1fr;text-align:center}.visual img{height:260px}nav{gap:.75rem;font-size:.85rem}h1{font-size:2rem}}
-</style></head>
-<body><header><div class="logo-container"><a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer"><img src="../logo-removebg-preview.png" alt="Logo Scuola" class="logo"></a></div><nav><ul><li><a href="../index.html">Catalogo progetti</a></li><li><a href="#features">FunzionalitÃ </a></li><li><a href="#about">Il Progetto</a></li></ul></nav></header><section class="hero" id="about"><div class="hero-content"><div><h1>Smiling <span>Planet</span></h1><p>Un progetto scientifico dedicato alla coltura di microalghe per studiare l'assorbimento della CO2 e la produzione di biomasse.</p></div><div class="visual"><img src="../sito-presentazione/SmilingPlanet.jpeg" alt="Smiling Planet"></div></div></section><main><section class="section" id="features"><h2>Scienza e sostenibilitÃƒÂ </h2><p>La sperimentazione porta nel laboratorio scolastico un approccio concreto alla ricerca ambientale e all'economia circolare.</p><div class="grid"><article class="card"><h3>Assorbimento della CO2</h3><p>Studio del ruolo delle microalghe nella cattura dell'anidride carbonica.</p></article><article class="card"><h3>Produzione di biomassa</h3><p>Osservazione della crescita e del possibile riutilizzo della biomassa prodotta.</p></article><article class="card"><h3>Ricerca in laboratorio</h3><p>Un percorso sperimentale che unisce biologia, sostenibilitÃƒÂ  e raccolta dati.</p></article></div></section></main><footer><p>&copy; 2026 4I. Tutti i diritti riservati.</p><span class="ai-credit">Sito realizzato con l'aiuto dell'AI</span></footer></body></html>
+        /* Ottimizzazione mobile */
+        @media (max-width: 700px) {
+            body { overflow-x: hidden; }
+            header { gap: 0.75rem; padding: 0.65rem 1rem; }
+            header nav, nav { min-width: 0; }
+            nav ul { justify-content: flex-end; flex-wrap: wrap; gap: 0.55rem 0.9rem; }
+            nav ul li a { font-size: 0.78rem; white-space: nowrap; }
+            .logo { height: 34px; max-width: 130px; }
+            .hero { padding: 3rem 1.25rem; }
+            .hero h1, h1 { font-size: clamp(1.8rem, 9vw, 2.35rem); line-height: 1.15; }
+            .hero p { font-size: 1rem; }
+            .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-copy { text-align: center; }
+            .hero-copy p, .hero p { margin-left: auto; margin-right: auto; }
+            .hero-visual, .visual { width: 100%; max-width: 100%; transform: none; }
+            .project-image, .visual img { height: min(62vw, 280px); }
+            .content-section, .section, .info-section, .management-section { margin: 2rem 1rem; padding: 2rem 1.1rem; border-radius: 14px; }
+            .catalog-section, .hackathon-section, main { margin: 2rem auto; padding: 0 1rem; }
+            .section-title { font-size: 1.65rem; margin-bottom: 1.25rem; }
+            .robot-grid, .features-grid, .hackathon-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+            .robot-card, .hackathon-card { min-width: 0; }
+            .robot-image-container { height: min(58vw, 230px); }
+            .robot-info, .hackathon-info { padding: 1.15rem; }
+            .filters-bar { gap: 0.5rem; margin-bottom: 1.75rem; }
+            .filter-btn { font-size: 0.78rem; padding: 0.45rem 0.7rem; }
+            .catalog-section.impresa-view .robot-grid, .catalog-section.impresa-view .robot-card[data-category~="impresa"] { width: 100%; grid-template-columns: 1fr; }
+            .video-container { padding-top: 56.25%; }
+            .video-frame { width: 100%; }
+            footer { padding: 1.5rem 1rem; }
+            footer p { font-size: 0.8rem; }
+            .ai-credit { font-size: 0.6rem; }
+        }
+
+        @media (max-width: 420px) {
+            header { align-items: flex-start; }
+            nav ul { gap: 0.4rem 0.65rem; }
+            nav ul li a { font-size: 0.7rem; }
+            .logo { height: 30px; max-width: 110px; }
+            .content-section, .section, .info-section, .management-section { padding: 1.5rem 0.9rem; }
+        }
+    </style></head>
+<body><header><div class="logo-container"><a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer"><img src="../logo-removebg-preview.png" alt="Logo Scuola" class="logo"></a></div><nav><ul><li><a href="../index.html">Catalogo progetti</a></li><li><a href="#features">Funzionalità</a></li><li><a href="#about">Il Progetto</a></li></ul></nav></header><section class="hero" id="about"><div class="hero-content"><div><h1>Smiling <span>Planet</span></h1><p>Un progetto scientifico dedicato alla coltura di microalghe per studiare l'assorbimento della CO2 e la produzione di biomasse.</p></div><div class="visual"><img src="../sito-presentazione/SmilingPlanet.jpeg" alt="Smiling Planet"></div></div></section><main><section class="section" id="features"><h2>Scienza e sostenibilità</h2><p>La sperimentazione porta nel laboratorio scolastico un approccio concreto alla ricerca ambientale e all'economia circolare.</p><div class="grid"><article class="card"><h3>Assorbimento della CO2</h3><p>Studio del ruolo delle microalghe nella cattura dell'anidride carbonica.</p></article><article class="card"><h3>Produzione di biomassa</h3><p>Osservazione della crescita e del possibile riutilizzo della biomassa prodotta.</p></article><article class="card"><h3>Ricerca in laboratorio</h3><p>Un percorso sperimentale che unisce biologia, sostenibilità e raccolta dati.</p></article></div></section></main><footer><p>&copy; 2026 4I. Tutti i diritti riservati.</p><span class="ai-credit">Sito realizzato con l'aiuto dell'AI</span></footer></body></html>
+
 
 
 
