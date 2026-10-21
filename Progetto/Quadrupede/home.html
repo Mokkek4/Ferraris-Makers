@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Bot Quadrupede</title>
+    <style>
+        :root{--primary:#0f172a;--accent:#38bdf8;--text:#334155;--bg:#f8fafc;--white:#fff}
+        *{box-sizing:border-box;margin:0;font-family:'Segoe UI',Tahoma,sans-serif}
+        body{background:radial-gradient(circle at 10% 20%,#38bdf81f,transparent 28rem),var(--bg);color:var(--text);line-height:1.6}
+        header{background:var(--primary);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.75rem 5%;position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px #0000001a}
+        .logo-container{display:flex;align-items:center}.logo{height:40px;width:auto;display:block;object-fit:contain}
+        header a{color:#fff;text-decoration:none;font-weight:500}nav ul{display:flex;list-style:none;gap:2rem;align-items:center}nav a:hover{color:var(--accent)}
+        .hero{background:linear-gradient(135deg,var(--primary),#1e293b);color:#fff;padding:4rem 5%}
+        .hero-content{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+        h1{font-size:2.5rem;color:#fff}h1 span{color:var(--accent)}.hero p{color:#cbd5e1;margin-top:1rem}
+        .visual{padding:.75rem;border:1px solid #38bdf859;border-radius:24px;background:#ffffff14;box-shadow:0 20px 50px #0005}
+        .visual img{display:block;width:100%;height:320px;object-fit:cover;border-radius:17px}
+        main{max-width:1100px;margin:4rem auto;padding:0 2rem}.section{background:#fff;border-radius:16px;padding:3rem 2rem;box-shadow:0 4px 20px #0000000d;margin-bottom:3rem}
+        h2{text-align:center;color:var(--primary);margin-bottom:1rem}.section>p{text-align:center;max-width:800px;margin:0 auto 2rem;color:#64748b}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}.card{background:var(--bg);border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem}.card h3{color:var(--primary);margin-bottom:.5rem}.card p{color:#64748b}
+        footer{background:var(--primary);color:#fff;text-align:center;padding:2rem;font-size:.9rem}.ai-credit{display:block;margin-top:.5rem;text-align:right;color:#ffffffa6;font-size:.65rem}
+        @media(max-width:760px){.hero-content{grid-template-columns:1fr;text-align:center}.visual img{height:260px}nav{gap:.75rem;font-size:.85rem}h1{font-size:2rem}}
+    </style>
+</head>
+<body>
+<header><div class="logo-container"><a href="https://www.isismarcianise.edu.it/ferraris_buccini/" target="_blank" rel="noopener noreferrer"><img src="../logo-removebg-preview.png" alt="Logo Scuola" class="logo"></a></div><nav><ul><li><a href="../sito-presentazione/home.html">Catalogo progetti</a></li><li><a href="#features">Funzionalità</a></li><li><a href="#about">Il Progetto</a></li></ul></nav></header>
+<section class="hero" id="about"><div class="hero-content"><div><h1>Spider-Bot <span>Quadrupede</span></h1><p>Un robot a quattro gambe progettato dagli studenti per muoversi con agilitÃ , equilibrio e precisione su terreni diversi.</p></div><div class="visual"><img src="../quadrupede.jpeg" alt="Spider-Bot Quadrupede"></div></div></section>
+<main><section class="section" id="features"><h2>La tecnologia del progetto</h2><p>Il quadrupede combina struttura meccanica, attuatori e programmazione per realizzare movimenti dinamici e flessibili.</p><div class="grid"><article class="card"><h3>Movimento dinamico</h3><p>Gambe coordinate per affrontare superfici irregolari mantenendo la stabilitÃ .</p></article><article class="card"><h3>Controllo intelligente</h3><p>Software sviluppato dagli studenti per gestire direzione, passo e risposta ai comandi.</p></article><article class="card"><h3>Prototipo scolastico</h3><p>Un progetto pratico che unisce progettazione, elettronica e fabbricazione digitale.</p></article></div></section></main>
+<footer><p>&copy; 2026 4I. Tutti i diritti riservati.</p><span class="ai-credit">Sito realizzato con l'aiuto dell'AI</span></footer>
+</body>
+</html>
+

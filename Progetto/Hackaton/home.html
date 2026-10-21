@@ -153,11 +153,12 @@
         .video-container video,
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: -2%;
+            left: -2%;
+            width: 104%;
+            height: 104%;
             border: none;
+            object-fit: cover;
         }
 
         .hackathon-info {
@@ -199,6 +200,15 @@
             margin-top: 4rem;
             font-size: 0.9rem;
         }
+
+        .ai-credit {
+            display: block;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.65rem;
+            font-weight: 400;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -212,7 +222,7 @@
                         <img src="../logo-removebg-preview.png" alt="logo" class="logo">
                     </a>
                 </li>
-                <li><a href="sito-presentazione/home.html">Sito presentazione</a></li>
+                <li><a href="../sito-presentazione/home.html">Catalogo progetti</a></li>
                 <li><a href="#hackathon">Hackathon</a></li>
             </ul>
         </nav>
@@ -221,7 +231,7 @@
     <!-- 2. PARTE PICCOLA PRESENTAZIONE -->
     <section class="hero">
         <h1>Concorsi & <span>Hackathon</span></h1>
-        <p>In questa sezione sono raccolti i progetti realizzati per le competizioni e gli Hackathon a cui abbiamo partecipato. Ogni anno ci mettiamo alla prova sviluppando soluzioni software e robotiche innovative.</p>
+        <p>In questa sezione sono raccolti i progetti realizzati per le competizioni e gli Hackathon a cui abbiamo partecipato. Ogni anno ci mettiamo alla prova sviluppando giochi innovativi.</p>
     </section>
 
     <!-- 3. PARTE CONCORSI HACKATHON -->
@@ -234,15 +244,15 @@
             <div class="hackathon-card">
                 <div class="video-container">
                     <!-- Sostituisci "video-2024-2025.mp4" con il percorso del tuo file video o un embed -->
-                    <video controls poster="poster-2024.jpg">
-                        <source src="video-2024-2025.mp4" type="video/mp4">
+                    <video controls preload="auto">
+                        <source src="Guardians of the Void.mp4" type="video/mp4">
                         Il tuo browser non supporta il tag video.
                     </video>
                 </div>
                 <div class="hackathon-info">
                     <span class="badge">Edizione 2024 / 2025</span>
-                    <h3>Progetto Videogame: "RoboEscape"</h3>
-                    <p><strong>Descrizione del Gioco:</strong> Un videogioco interattivo e strategico in cui il giocatore deve guidare un robot attraverso labirinti complessi ed evitare ostacoli dinamici. Il titolo integra meccaniche di gioco basate sulla fisica dei robot ed enigmi di logica programmatica.</p>
+                    <h3>Guardians of the Void</h3>
+                    <p><strong>Descrizione del Gioco:</strong> Detriti e asteroidi minacciano l'umanità e solo pochi coraggiosi possono affrontare questo disastro. Nei panni di un Raccoglitore Stellare della Vacuum Cleaners Corporation, dovrai ripulire lo spazio, raccogliere i detriti e riportare l'ordine nel vuoto cosmico.</p>
                 </div>
             </div>
 
@@ -250,15 +260,17 @@
             <div class="hackathon-card">
                 <div class="video-container">
                     <!-- Sostituisci "video-2025-2026.mp4" con il percorso del tuo file video o un embed -->
-                    <video controls poster="poster-2025.jpg">
+                    <video controls preload="auto">
                         <source src="video-2025-2026.mp4" type="video/mp4">
                         Il tuo browser non supporta il tag video.
                     </video>
                 </div>
                 <div class="hackathon-info">
                     <span class="badge">Edizione 2025 / 2026</span>
-                    <h3>Ecosistema di Robotica Autonoma</h3>
-                    <p>Un sistema innovativo di esplorazione basato su robotica collaborativa tra quadrupedi e cingolati per il monitoraggio e la mappatura di ambienti complessi e inaccessibili.</p>
+                    <h3>Collapse the System</h3>
+                    <p><strong>Descrizione del Gioco:</strong>Un gioco 2D in cui il giocatore segue l'evoluzione di tre personaggi ,tutti membri di 
+                    un collettivo rivoluzionario, ed ognuno con un ruolo specifico all'interno di un piano coordinato
+                    con l'obiettivo di innescare una rivoluzione del sistema. </p>
                 </div>
             </div>
 
@@ -267,6 +279,7 @@
 
     <footer>
         <p>&copy; 2026 4I. Tutti i diritti riservati.</p>
+        <span class="ai-credit">Sito realizzato con l'aiuto dell'AI</span>
     </footer>
 
 </body>
