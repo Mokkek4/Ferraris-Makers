@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -302,6 +302,25 @@
             margin-bottom: 1.5rem;
         }
 
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 1.75rem;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #0f172a;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+            aspect-ratio: 16 / 9;
+        }
+
+        .youtube-embed iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
         /* MANAGEMENT / DOCENTI SECTION */
         .management-section {
             position: relative;
@@ -449,6 +468,7 @@
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#catalog">Catalogo Progetti</a></li>
+                <li><a href="#video-progetti">Video presentazione progetti</a></li>
                 <li><a href="#hackathons">Hackathon & Concorsi</a></li>
                 <li><a href="#lab">Il Laboratorio</a></li>
                 <li><a href="#management">Area Docenti</a></li>
@@ -618,6 +638,22 @@
         </div>
     </section>
 
+    <!-- VIDEO PRESENTAZIONE PROGETTI -->
+    <section class="info-section" id="video-progetti">
+        <h2>Video presentazione progetti</h2>
+        <p>Scopri i progetti realizzati dagli studenti attraverso il video di presentazione.</p>
+        <div class="youtube-embed">
+            <iframe
+                src="https://www.youtube.com/embed/QfstiFktwzY"
+                title="Video presentazione progetti"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
     <!-- HACKATHON E CONCORSI -->
     <section class="info-section" id="hackathons">
         <h2>Hackathon e Concorsi</h2>
@@ -671,4 +707,3 @@
 
 </body>
 </html>
-
